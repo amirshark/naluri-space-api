@@ -1,79 +1,97 @@
-# Pi Calculation Server
+# 🧠 Naluri Pi Calculation API
 
-This is the backend server for the Naluri Mobile Coding Challenge. It provides a RESTful API that calculates Pi to increasing accuracy using a known algorithm and stores the most precise value. It supports control endpoints to start, pause, and reset the calculation.
+This is the backend service for the Naluri Space Project coding assessment. It calculates the value of π (Pi) algorithmically using a simple method and serves the result through HTTP endpoints.
 
-## Features
+---
 
-- Incremental Pi calculation
-- Stores and returns the most accurate value
-- REST API for controlling the calculation
-- Persistent value in memory
-- Compatible with React Native mobile app via HTTP
+## 📀 Method Used: Gregory–Leibniz Series
 
-## API Endpoints
+The Pi calculation is performed using the **Gregory–Leibniz series**, defined as:
 
-### `GET /pi`
-Returns the current value of Pi and its accuracy.
+$$
+\pi = 4 \left(1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots \right)
+$$
 
-```json
-{
-  "pi": "3.1415",
-  "accuracy": 4
-}
-```
+This method is easy to implement but converges very slowly, making it suitable for demonstration or educational purposes.
 
-### `POST /start`
-Starts the Pi calculation in the background.
+---
 
-### `POST /pause`
-Pauses the current calculation.
+## 🚀 Features
 
-### `POST /reset`
-Resets the Pi value and calculation state.
+* Incrementally calculates π in the background
+* REST API endpoints to start, pause, reset, and retrieve the current value
+* Tracks decimal place accuracy
+* Simple Node.js server using Express
 
-## How It Works
+---
 
-The server runs a Pi calculation algorithm (e.g., the Nilakantha series or Leibniz formula) in a loop. It calculates the next digit of Pi and updates an in-memory variable. The calculation continues until paused or stopped.
-
-## Tech Stack
-
-- Node.js (or Python/FastAPI depending on your implementation)
-- Express (or equivalent)
-- In-memory storage for simplicity (can be replaced with Redis or DB)
-
-## How to Run
-
-```bash
-# Install dependencies
-npm install
-
-# Start server
-npm start
-```
-
-By default, the server runs at `http://localhost:3000`. You can configure this using environment variables or `.env` file.
-
-## Environment Variables
-
-- `PORT`: Port number (default: 3000)
-
-## Folder Structure
+## 📁 Project Structure
 
 ```
 backend/
-├── server.js
-├── piCalculator.js
-├── routes/
-├── controllers/
-├── .env
-└── package.json
+├── piCalculator.js         # Core algorithm logic
+├── index.js                # Express server and routing
+├── package.json
+└── README.md
 ```
 
-## Notes
+---
 
-- This is a demo backend and may not be suitable for large-scale production use.
-- Ensure the server is always running to continue improving Pi accuracy.
+## 📦 Setup Instructions
 
-## License
+### 1. Install Dependencies
 
-MIT License
+```bash
+npm install
+```
+
+### 2. Start the Server
+
+```bash
+npm start
+```
+
+By default, it runs on `http://localhost:3000`
+
+---
+
+## 📱 API Endpoints
+
+| Method | Endpoint | Description                      |
+| ------ | -------- | -------------------------------- |
+| GET    | `/pi`    | Get current π value and accuracy |
+| POST   | `/start` | Start calculating π              |
+| POST   | `/pause` | Pause calculation                |
+| POST   | `/reset` | Reset π value                    |
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file if needed (e.g. to define port):
+
+```
+PORT=3000
+```
+
+---
+
+## 📌 Notes
+
+* The calculation runs in intervals (`setInterval`) every 100ms
+* You can increase the frequency or optimize the algorithm for better performance
+
+---
+
+## 📊 Improvement Ideas
+
+* Switch to faster algorithms (e.g. Nilakantha, Chudnovsky)
+* Save progress to file or DB for persistence
+* Add WebSocket for real-time updates
+* Implement rate limiting for the API
+
+---
+
+## 🪪 License
+
+This project is part of the Naluri Tech Assessment and is intended for evaluation purposes only.
